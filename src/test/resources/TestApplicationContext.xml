@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	 <bean id="customerService" class="com.rhb.obiz.service.CustomerServiceImpl">
+	 	<property name="customerRepository" ref="customerRepository"/>
+	 </bean> 
+	 
+	 <bean id="customerRepository" class="com.rhb.obiz.repository.CustomerRepositoryImplForLNG">
+	 	<constructor-arg ref="jdbcTemplate1"/>  
+	 </bean>
+
+
+	<bean id="jdbcTemplate1" class="org.springframework.jdbc.core.JdbcTemplate">
+	        <property name="dataSource" ref="dataSource1" />
+	</bean>
+ 
+	<bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource"
+	        destroy-method="close">
+	        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+	        <property name="url"  value="jdbc:sqlserver://192.168.10.6:1433;database=AIS20140519052224;integratedSecurity=false" />
+	        <property name="username" value="cxxz" />
+	        <property name="password" value="cxxz" />
+	</bean>
+	
+
+ 
+</beans>
